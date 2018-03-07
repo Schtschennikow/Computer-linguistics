@@ -404,7 +404,7 @@ def main():
 
     pp.close()
 
-    print('\nAnalysis is done!\n\nResult in ./rusult/ directory.\n\nBitte shoen.')
+    print('\nAnalysis is done!\n\nResult in ./rusult/ directory.\n\nBitte schoen.')
     print("\ntime: " + str(round((time.time()-Starten), 2)))
 
 main()
