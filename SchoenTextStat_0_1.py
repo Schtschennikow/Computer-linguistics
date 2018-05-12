@@ -1,5 +1,3 @@
-# coding: utf-8
-
 import pymorphy2
 import re
 import string
@@ -154,7 +152,6 @@ def main():
     Wordforms = set(Gross_Liste)
     Gefaelschtes = []
     OMO = []
-    Inde = []
 
     Lemmas_Woerterbuch = defaultdict(set)
     Wordforms_Woerterbuch = defaultdict(list)
@@ -172,7 +169,6 @@ def main():
             if len(MP_W) > 1:
                 o = [Wort, len(MP_W)]
                 OMO.append(o)
-            Inde.append(Informationen.score)
 
             Lemma = Informationen.normal_form
             if str(Informationen.methods_stack[0][0]) == '<FakeDictionary>':
@@ -217,10 +213,10 @@ def main():
                 GL_C = gl
                 break
     
-    if not os.path.isdir('./rusult'):
-        os.mkdir('./rusult')
+    if not os.path.isdir('./result'):
+        os.mkdir('./result')
 
-    pp = PdfPages('./rusult/rusult_'+RName+'.pdf')
+    pp = PdfPages('./result/result_'+RName+'.pdf')
 
     fig = plt.figure(figsize=(16,6))
     tete('', 'Результат\nанализа текста', RName)
@@ -365,7 +361,7 @@ def main():
     
     if Gefaelschtes:
         df1 = pd.DataFrame(Gefaelschtes, columns=['слово', 'разбор','лема', 'оценка точности разбора'])
-        df1.to_csv('./rusult/unknown_words_'+RName+'.csv', encoding='utf-8')
+        df1.to_csv('./result/unknown_words_'+RName+'.csv', encoding='utf-8')
 
         gfg = [i[0] for i in Gefaelschtes]
         h = ''
@@ -382,7 +378,7 @@ def main():
         fig = plt.figure(figsize=(16,6))
         plt.subplot(1,2,1)
         tete(u"Процент слов,\nотсутствующих в словаре", nn(Wordforms_Nummer, len(gfg)), 
-            'таблица несловарных слов\nсодержится в файле\n./rusult/unknown_words_')
+            'таблица несловарных слов\nсодержится в файле\n./result/unknown_words_')
         plt.subplot(1,2,2)        
         plt.text(-.2, 0,  h, fontsize=14, fontweight='light')
         plt.xticks([])
@@ -396,15 +392,9 @@ def main():
         pp.savefig(fig)
         plt.close()
 
-    fig = plt.figure(figsize=(16,4.65))
-    tete(u"Средняя оценка точности разбора\nкаждого сова", str(round((sum(Inde)/len(Inde)), 2)), 
-        'по данным pymorphy2')
-    pp.savefig(fig)
-    plt.close()
-
     pp.close()
 
-    print('\nAnalysis is done!\n\nResult in ./rusult/ directory.\n\nBitte schoen.')
+    print('\nAnalysis is done!\n\nResult in ./result/ directory.\n\nBitte schoen.')
     print("\ntime: " + str(round((time.time()-Starten), 2)))
 
 main()
