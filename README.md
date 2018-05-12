@@ -1,20 +1,18 @@
 # SchoenTextStat
 
 #### Библиотеки:
-
-* pymorphy2
-* re
-* string
-* os
-* collections
-* numpy
-* matplotlib
-* seaborn
-* pandas
-* collections
+pymorphy2  
+re  
+string  
+os  
+collections  
+numpy  
+matplotlib  
+seaborn  
+pandas  
+collections  
 
 #### Описание:
-
 В процессе работы программа запрашивает на вход текстовый документ в TXT формате,
 токенизирует его и подсчитывает все изображенные выше статистики. Также, в процессе 
 работы создается CSV таблица, в которую помещаются слова, отсутствующие в словаре, 
